@@ -41,5 +41,6 @@ button.id = data[i].name
   newDiv.appendChild(button)
   // put new div inside items container
   itemsContainer.appendChild(newDiv)
+  
 }
 
