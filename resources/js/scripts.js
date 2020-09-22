@@ -45,13 +45,10 @@ button.id = data[i].name
 
   const cart = [ ]
 
-  const name = name
-  const price = price
   
-  const obj = {name, price }
-  console.log(obj)
   console.log('*********************')
-
+//-------------------------------------------------------------
+//add Item
   function addItem(name, price) {
 
      for (let i = 0; i < cart.length; i +=1) {
@@ -60,10 +57,10 @@ button.id = data[i].name
              //stop here
          }
      }
-      const item ={ name, price, qty: 1}
+      const item ={ name:name, Price: price, qty: 1}
       cart.push(item)
   }
-
+//----------------------------------------------------------------
   // show Items
   function showItems() {
       const qty = getQty()
@@ -77,6 +74,7 @@ button.id = data[i].name
 
       console.log (`Total in cart:  $${(getTotal())}`)
   }
+  //---------------------------------------------------------------
   //Get Qty
   function getQty() {
       let qty = 0
@@ -85,7 +83,7 @@ button.id = data[i].name
       }
       return qty
   }
-
+//---------------------------------------------------------
   //Get Total
 function getTotal() { 
     let total = 0 
@@ -96,23 +94,42 @@ function getTotal() {
 
 }
 
+function removeItem(name, qty = 0 ) {
+   for (let i = 0; i < cart.length; i += 1) {
+       if (cart[i].name === name) {
+           if(qty>0) {
+            cart[i].qty -= qtty
+           }
+           
+           if (cart[i].qty < 1 || qty === 0) {
+             cart.splice(i, 1)
+           }
+
+        
+           return
+       }
+
+   }
+}
 
 
 
 
-
+//------------------------------------------------------------
   addItem('apple', 0.99)
   addItem('orange', 1.29)
   addItem('Opinion', 0.02)
   addItem('Yoga mat', 15.99)
-  addItem('orange', 1,29)
+  addItem('orange', 1.29)
   addItem('apple',0.99)
   addItem('yoga mat', 15.99)
 
   
   showItems()
+removeItem('apple', 1)
+removeItem('orange')
 
-
+showItems()
 
 }
 
