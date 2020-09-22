@@ -42,5 +42,22 @@ button.id = data[i].name
   // put new div inside items container
   itemsContainer.appendChild(newDiv)
   
+
+  const cart = [ ]
+
+  function addItem(name, price) {
+      const item ={ name:name, price: price, qty: 1}
+      cart.push(item)
+  }
+  function showItems() {
+      console.log (`thank you for buying ${cart.length} items today`)
+  }
+  addItem('apple', 0.99)
+  addItem('orange', 1.29)
+  
+  showItems()
+
+
+
 }
 
