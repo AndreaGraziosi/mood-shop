@@ -45,15 +45,70 @@ button.id = data[i].name
 
   const cart = [ ]
 
+  const name = name
+  const price = price
+  
+  const obj = {name, price }
+  console.log(obj)
+  console.log('*********************')
+
   function addItem(name, price) {
-      const item ={ name:name, price: price, qty: 1}
+
+     for (let i = 0; i < cart.length; i +=1) {
+         if (cart[i].name === name) {
+             cart[i].qty += 1
+             //stop here
+         }
+     }
+      const item ={ name, price, qty: 1}
       cart.push(item)
   }
+
+  // show Items
   function showItems() {
-      console.log (`thank you for buying ${cart.length} items today`)
+      const qty = getQty()
+      console.log (`Thank you for buying ${getQty()} items today`)
+
+      for(let i = 0; i< cart.length; i += 1) {
+          console.log(`- ${cart[i].name} $${cart[i].price} x ${cart[i].qty}`)
+      }
+
+     
+
+      console.log (`Total in cart:  $${(getTotal())}`)
   }
+  //Get Qty
+  function getQty() {
+      let qty = 0
+      for (let i =0; i< cart.length; i += 1){
+          qty += cart[i].qty
+      }
+      return qty
+  }
+
+  //Get Total
+function getTotal() { 
+    let total = 0 
+    for (let i = 0; i < cart.length; i +=1) {
+        total += cart[i].price * cart[i].qty
+    } 
+    return total.toFixed(2)
+
+}
+
+
+
+
+
+
   addItem('apple', 0.99)
   addItem('orange', 1.29)
+  addItem('Opinion', 0.02)
+  addItem('Yoga mat', 15.99)
+  addItem('orange', 1,29)
+  addItem('apple',0.99)
+  addItem('yoga mat', 15.99)
+
   
   showItems()
 
