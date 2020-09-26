@@ -1,5 +1,14 @@
 const itemsContainer = document.getElementById('items')
+
+
+const itemList = document.getElementById('item-list')
+console.log(itemList)
+itemList.innerHTML = '<li> Hello World</li>'
+
 import data from './data.js'
+const cartQty = document.getElementById('cart-qty')
+const cartTotal = document.getElementById('cart-total')
+
 
 // the length of our data determines how many times this loop goes around
 for (let i=0; i<data.length; ++i) {
@@ -21,13 +30,13 @@ for (let i=0; i<data.length; ++i) {
      itemsContainer.appendChild(newDiv)
 
      // create a paragraph element for a description
-let desc = document.createElement('P')
+let desc = document.createElement('p')
 // give the paragraph text from the data
 desc.innerText =data[i].desc
 // append the paragraph to the div
 newDiv.appendChild(desc)
 // do the same thing for price
-let price = document.createElement('P')
+let price = document.createElement('p')
 price.innerText = data[i].price
 newDiv.appendChild(price)
 let button = document.createElement('button')
@@ -64,15 +73,28 @@ button.id = data[i].name
   // show Items
   function showItems() {
       const qty = getQty()
-      console.log (`Thank you for buying ${getQty()} items today`)
+      cartQty.innerHTML = `Thank you for buying ${getQty()} items today`
 
+
+      let itemStr = ''
       for(let i = 0; i< cart.length; i += 1) {
-          console.log(`- ${cart[i].name} $${cart[i].price} x ${cart[i].qty}`)
+          //console.log(`- ${cart[i].name} $${cart[i].price} x ${cart[i].qty}`)
+        // const name = cart[i].name
+        // const price = cart[i].price
+        // const qty = cart[i].qty
+
+        const { name, price, qty} = cart[i]
+
+          itemStr += `<li>
+          ${name} 
+          $${price} x ${qty} =
+          ${qty * price} 
+          </li>`
       }
+      itemList.innerHTML = itemStr
 
-     
-
-      console.log (`Total in cart:  $${(getTotal())}`)
+      //console.log (`Total in cart:  $${(getTotal())}`)
+      cartTotal.innerHTML = `Total in cart:  $${(getTotal())}`
   }
   //---------------------------------------------------------------
   //Get Qty
@@ -126,10 +148,10 @@ function removeItem(name, qty = 0 ) {
 
   
   showItems()
-removeItem('apple', 1)
+
 removeItem('orange')
 
-showItems()
+showItems(itemList.innerHTML)
 
 }
 
