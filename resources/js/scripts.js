@@ -16,6 +16,8 @@ for (let i=0; i<data.length; ++i) {
     let newDiv = document.createElement('div');
     newDiv.className = 'item'
 
+    
+
     // create an image element
     let img = document.createElement('img');
     // this will change each time we go through the loop. Can you explain why?
@@ -28,6 +30,8 @@ for (let i=0; i<data.length; ++i) {
     console.log(img)
      // put new div inside items container
      itemsContainer.appendChild(newDiv)
+
+ 
 
      // create a paragraph element for a description
 let desc = document.createElement('p')
@@ -56,6 +60,13 @@ button.id = data[i].name
 
   
   console.log('*********************')
+
+  const all_items_button = Array.from(document.querySelectorAll("button"))
+
+  all_items_button.forEach(elt => elt.addEventListener('click', () => {
+    addItem(elt.getAttribute('id'), elt.getAttribute('data-price'))
+    showItems()
+  }))
 //-------------------------------------------------------------
 //add Item
   function addItem(name, price) {
