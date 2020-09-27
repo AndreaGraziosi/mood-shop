@@ -8,8 +8,57 @@ itemList.innerHTML = '<li> Hello World</li>'
 import data from './data.js'
 const cartQty = document.getElementById('cart-qty')
 const cartTotal = document.getElementById('cart-total')
+const addForm = document.getElementById('add-form')
+const itemName = document.getElementById('item-name')
+const itemPrice = document.getElementById('item-price')
+
+const cart = []
+
+//------------------------------------------------------------
+// handle change events on update input
+itemList.onChange =function(e) {
+   if(e.target && e.target.class.comtains('update') ){
+     const name = e.target.dataset.name
+     const qty = parseInt(e.target.value)
+     updateCart(name, qty)
+   }
+
+}
 
 
+
+
+
+//-----------------------------------------------------------------
+
+//handle clicks on list
+itemList.onclick = function(e){
+     console.log('Clicked list!')
+     console.log(e.target)
+    if (e.target && e.target.classList.contains('remove')) {
+      const name = e.target.dataset.name//data-name
+      removeItem(name)
+     }else if(e.target && e.target.classList.contains('add-one')) {
+      const name = e.target.dataset.name
+      addItem(name)
+     }else if (e.target && e.target.classList.contains('remove-one')) {
+      const name = e.target.dataset.name
+      removeItem(name, 1)
+     }
+}
+
+//--------------------------------------------------------------------
+//handle add form submit
+addForm.onsubmit = function(e) {
+  e.preventDefault()
+  const name = itemName.value
+  const price = itemPrice.value
+  addItem(name, price)
+
+// }
+
+
+//----------------------------------------------------------------------
 // the length of our data determines how many times this loop goes around
 for (let i=0; i<data.length; ++i) {
     // create a new div element and give it a class name
@@ -100,6 +149,10 @@ button.id = data[i].name
           ${name} 
           $${price} x ${qty} =
           ${qty * price} 
+          <button class = "remove" data-name= "${name} ">Remove</button>
+          <button class = "add-one" data-name= "${name} ">Remove</button>
+          <button class = "remove-one" data-name= "${name} ">Remove</button>
+          <input class = 'update' type="number" date-name = "${name}">
           </li>`
       }
       itemList.innerHTML = itemStr
@@ -145,8 +198,18 @@ function removeItem(name, qty = 0 ) {
    }
 }
 
-
-
+//------------------------------------
+function updateCart(name, qty){
+  for (let i = 0; i < Cart.length; i += 1) {
+    if (cart[i].qty =qty)
+    if (qty<1) {
+      removeItem(name)
+    }
+    cart[i].qty = qty
+    showItems()
+    return
+  }
+}
 
 //------------------------------------------------------------
   addItem('apple', 0.99)
@@ -161,8 +224,4 @@ function removeItem(name, qty = 0 ) {
   showItems()
 
 removeItem('orange')
-
 showItems(itemList.innerHTML)
-
-}
-
